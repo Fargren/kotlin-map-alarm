@@ -1,6 +1,5 @@
 package epsz.mapalarm
 
-import com.mapalarm.PresentablePosition
 import org.junit.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -22,7 +21,7 @@ class MapUIPresenterTest {
         val ui = MapUISpy()
         val sut = MapUIPresenter(ui)
 
-        sut.showUserAt(PresentablePosition(5.0, 48.0))
+        sut.showUserAt(Position(5.0, 48.0))
 
         assertEquals(5.0, ui.latitude)
         assertEquals(48.0, ui.longitude)

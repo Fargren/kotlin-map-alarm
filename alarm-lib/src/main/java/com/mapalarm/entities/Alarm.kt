@@ -1,5 +1,7 @@
 package com.mapalarm.entities
 
+import com.mapalarm.datatypes.Position
+
 class Alarm(val position: Position, val radius: Double) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

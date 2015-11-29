@@ -1,6 +1,6 @@
 package com.mapalarm
 
-import com.mapalarm.entities.Position
+import com.mapalarm.datatypes.Position
 import com.mapalarm.usecases.MovePresenter
 import com.mapalarm.usecases.MoveUseCase
 import org.junit.Assert.assertEquals
@@ -26,7 +26,7 @@ public class MoveUseCaseTest {
         sut.refreshPosition()
 
         assertEquals(presenter.userPosition,
-                PresentablePosition(fakeLocationGateway.lat, fakeLocationGateway.lng))
+                Position(fakeLocationGateway.lat, fakeLocationGateway.lng))
     }
 
     @Test @Throws(Exception::class) fun cantFindPosition_presentsPositioningError() {
@@ -58,9 +58,9 @@ class FailingLocationGateway : LocationGateway {
 
 class MovePresenterSpy : MovePresenter {
     var positionUnknown: Boolean = false
-    var userPosition: PresentablePosition? = null
+    var userPosition: Position? = null
 
-    override fun showUserAt(position: PresentablePosition) {
+    override fun showUserAt(position: Position) {
         userPosition = position
     }
 

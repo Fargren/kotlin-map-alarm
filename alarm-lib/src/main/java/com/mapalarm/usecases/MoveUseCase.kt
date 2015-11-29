@@ -1,8 +1,7 @@
 package com.mapalarm.usecases
 
 import com.mapalarm.Environment
-import com.mapalarm.PresentablePosition
-import com.mapalarm.entities.Position
+import com.mapalarm.datatypes.Position
 
 class MoveUseCase(val presenter: MovePresenter) {
 
@@ -12,7 +11,7 @@ class MoveUseCase(val presenter: MovePresenter) {
 
     val onPositionAcquired: (Position) -> Unit = {
         pos ->
-        presenter.showUserAt(PresentablePosition(pos.latitude, pos.longitude))
+        presenter.showUserAt(Position(pos.latitude, pos.longitude))
     }
 
     val onPositioningError = { -> presenter.showPositionUnknown() }

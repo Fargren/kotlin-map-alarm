@@ -5,7 +5,7 @@ import com.mapalarm.Environment
 import com.mapalarm.entities.Alarm
 import com.mapalarm.usecases.AddAlarmPresenter
 import com.mapalarm.usecases.AddAlarmUseCase
-import com.mapalarm.entities.Position
+import com.mapalarm.datatypes.Position
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test

@@ -1,6 +1,5 @@
 package epsz.mapalarm
 
-import com.mapalarm.PresentablePosition
 import com.mapalarm.usecases.MovePresenter
 
 class MapUIPresenter(val ui: MapUI) : MovePresenter {
@@ -8,7 +7,7 @@ class MapUIPresenter(val ui: MapUI) : MovePresenter {
         ui.showUpdatingPositionToast()
     }
 
-    override fun showUserAt(position: PresentablePosition) {
+    override fun showUserAt(position: Position) {
         ui.moveMapTo(position.latitude, position.longitude)
     }
 }

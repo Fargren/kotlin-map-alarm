@@ -1,8 +1,8 @@
 package com.mapalarm.usecases
 
-import com.mapalarm.PresentablePosition
+import com.mapalarm.datatypes.Position
 
 interface MovePresenter {
-    fun showUserAt(position: PresentablePosition)
+    fun showUserAt(position: Position)
     open fun showPositionUnknown()
 }

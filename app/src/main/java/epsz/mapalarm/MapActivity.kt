@@ -13,7 +13,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.mapalarm.Environment
 import com.mapalarm.LocationGateway
-import com.mapalarm.entities.Position
+import com.mapalarm.datatypes.Position
 import com.mapalarm.usecases.MoveUseCase
 
 class MapActivity : FragmentActivity(), OnMapReadyCallback, MapUI {
