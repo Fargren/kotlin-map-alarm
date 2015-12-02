@@ -1,6 +1,7 @@
 package epsz.mapalarm
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.FragmentActivity
 import com.google.android.gms.common.ConnectionResult
@@ -10,6 +11,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.mapalarm.Environment
 import com.mapalarm.LocationGateway
@@ -51,11 +53,15 @@ class MapActivity : FragmentActivity(), OnMapReadyCallback, MapUI {
     }
 
     override fun showCircleAt(pos: Position) {
-        throw UnsupportedOperationException()
+        map?.addCircle(CircleOptions()
+                .center(LatLng(-33.87365, 151.20689))
+                .radius(10000.0)
+                .strokeColor(Color.RED)
+                .fillColor(Color.BLUE));
     }
 }
 
-class GoogleApiLocationGateway (val context:Context) : LocationGateway,GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+class GoogleApiLocationGateway(val context: Context) : LocationGateway, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     private var callback: (Position) -> Unit = { }
     private var onError: () -> Unit = {}
     private var googleApiClient: GoogleApiClient? = null
