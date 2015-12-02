@@ -14,6 +14,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.mapalarm.Environment
 import com.mapalarm.LocationGateway
 import com.mapalarm.datatypes.Position
+import com.mapalarm.usecases.ListTriggersUseCase
 import com.mapalarm.usecases.MoveUseCase
 
 class MapActivity : FragmentActivity(), OnMapReadyCallback, MapUI {
@@ -35,6 +36,8 @@ class MapActivity : FragmentActivity(), OnMapReadyCallback, MapUI {
         map = googleMap
 
         MoveUseCase(MapUIPresenter(this)).refreshPosition()
+
+        ListTriggersUseCase(MapUIPresenter(this)).listAll()
     }
 
     override fun moveMapTo(latitude: Double, longitude: Double) {
@@ -44,6 +47,10 @@ class MapActivity : FragmentActivity(), OnMapReadyCallback, MapUI {
     }
 
     override fun showUpdatingPositionToast() {
+        throw UnsupportedOperationException()
+    }
+
+    override fun showCircleAt(pos: Position) {
         throw UnsupportedOperationException()
     }
 }
@@ -87,4 +94,5 @@ interface MapUI {
     fun moveMapTo(latitude: Double, longitude: Double)
 
     open fun showUpdatingPositionToast()
+    open fun showCircleAt(pos: Position)
 }
