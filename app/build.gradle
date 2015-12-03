@@ -18,6 +18,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    productFlavors {
+        real {
+            applicationId = "epsz.mapalarm"
+        }
+        dev {
+            applicationId = "epsz.mapalarm"
+            minSdkVersion 21
+        }
+    }
+
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }

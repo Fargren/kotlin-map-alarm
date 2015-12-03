@@ -54,7 +54,7 @@ class MapActivity : FragmentActivity(), OnMapReadyCallback, MapUI {
 
     override fun showCircleAt(pos: Position) {
         map?.addCircle(CircleOptions()
-                .center(LatLng(-33.87365, 151.20689))
+                .center(LatLng(pos.latitude, pos.longitude))
                 .radius(10000.0)
                 .strokeColor(Color.RED)
                 .fillColor(Color.BLUE));
