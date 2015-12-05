@@ -36,7 +36,7 @@ class ListTriggersUseCaseTests {
         sut.listAll()
 
         assertEquals(1, presenter.triggers!!.size)
-        assertTrue(presenter.triggers!!.contains(PresentableTrigger(Position(5.0, 42.0))))
+        assertTrue(presenter.triggers!!.contains(PresentableTrigger(Position(5.0, 42.0), 200.0)))
     }
 
     @Test
@@ -46,20 +46,20 @@ class ListTriggersUseCaseTests {
         sut.listAll()
 
         assertEquals(2, presenter.triggers!!.size)
-        assertTrue(presenter.triggers!!.contains(PresentableTrigger(Position(5.0, 42.0))))
-        assertTrue(presenter.triggers!!.contains(PresentableTrigger(Position(-5.0, -2.0))))
+        assertTrue(presenter.triggers!!.contains(PresentableTrigger(Position(5.0, 42.0), 100.0)))
+        assertTrue(presenter.triggers!!.contains(PresentableTrigger(Position(-5.0, -2.0), 200.0)))
     }
 }
 
 class TwoTriggersGateway : TriggersGateway {
     override fun getGateways(): Set<PositionTrigger> {
-        return hashSetOf(PositionTrigger(Position(5.0, 42.0)), PositionTrigger(Position(-5.0, -2.0)))
+        return hashSetOf(PositionTrigger(Position(5.0, 42.0), 100.0), PositionTrigger(Position(-5.0, -2.0), 200.0))
     }
 }
 
 class OneTriggerTriggersGateway : TriggersGateway {
     override fun getGateways(): Set<PositionTrigger> {
-        return Collections.singleton(PositionTrigger(Position(5.0, 42.0)))
+        return Collections.singleton(PositionTrigger(Position(5.0, 42.0), 200.0))
     }
 }
 

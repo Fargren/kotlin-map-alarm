@@ -15,7 +15,7 @@ class MapUIPresenter(val ui: MapUI) : MovePresenter, ListTriggersPresenter {
     }
 
     override fun showTriggers(triggers: Set<PresentableTrigger>) {
-        triggers.forEach { ui.showCircleAt( it.position) }
+        triggers.forEach { ui.showCircleAt( it.position, it.radius) }
     }
 
 }

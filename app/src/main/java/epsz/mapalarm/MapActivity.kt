@@ -52,10 +52,10 @@ class MapActivity : FragmentActivity(), OnMapReadyCallback, MapUI {
         throw UnsupportedOperationException()
     }
 
-    override fun showCircleAt(pos: Position) {
+    override fun showCircleAt(pos:Position, radius: Double) {
         map?.addCircle(CircleOptions()
                 .center(LatLng(pos.latitude, pos.longitude))
-                .radius(10000.0)
+                .radius(radius)
                 .strokeColor(Color.RED)
                 .fillColor(Color.BLUE));
     }
@@ -100,5 +100,5 @@ interface MapUI {
     fun moveMapTo(latitude: Double, longitude: Double)
 
     open fun showUpdatingPositionToast()
-    open fun showCircleAt(pos: Position)
+    open fun showCircleAt(pos:Position, radius: Double)
 }

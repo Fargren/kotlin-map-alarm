@@ -9,7 +9,7 @@ class ListTriggersUseCase(val presenter: ListTriggersPresenter) {
 
     fun listAll() {
         val triggers = Environment.triggersGateway!!.getGateways().map {
-            it -> PresentableTrigger(Position(it.position.latitude , it.position.longitude))
+            PresentableTrigger(Position(it.position.latitude , it.position.longitude), it.radius)
         }
         presenter.showTriggers(HashSet(triggers))
     }

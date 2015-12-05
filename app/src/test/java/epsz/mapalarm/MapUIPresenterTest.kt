@@ -28,14 +28,14 @@ class MapUIPresenterTest {
 
     @Test
     fun showTriggers_withSomeTriggers_addsCircleToTheUI() {
-        sut.showTriggers(hashSetOf(PresentableTrigger(Position(5.0, 48.0)), PresentableTrigger(Position(0.5, 4.0))))
+        sut.showTriggers(hashSetOf(PresentableTrigger(Position(5.0, 48.0), 100.0), PresentableTrigger(Position(0.5, 4.0), 200.0)))
 
-        assertEquals(ui.circles, hashSetOf(Position(5.0, 48.0), Position(0.5, 4.0)))
+        assertEquals(ui.circles, hashSetOf(Pair(Position(5.0, 48.0), 100.0), Pair(Position(0.5, 4.0), 200.0)))
     }
 }
 
 class MapUISpy : MapUI {
-    var circles: HashSet<Position> = HashSet()
+    var circles: HashSet<Pair<Position, Double>> = HashSet()
     var showedUpdatingPositionToast: Boolean = false
     var latitude: Double = 0.0
     var longitude: Double = 0.0
@@ -49,8 +49,8 @@ class MapUISpy : MapUI {
         this.longitude = longitude
     }
 
-    override fun showCircleAt(pos:Position) {
-        this.circles.add(pos)
+    override fun showCircleAt(pos:Position, radius: Double) {
+        this.circles.add(Pair(pos, radius))
     }
 
 }
