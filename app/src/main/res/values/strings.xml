@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">MapAlarm</string>
-    <string name="title_activity_map">Map</string>
+    <string name="app_name">Map Alarm</string>
+    <string name="instructions_add_mode">Tap map to add alarm</string>
 </resources>

@@ -29,8 +29,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="kotlin-stdlib-1.0.0-beta-2423" level="project" />
-    <orderEntry type="library" exported="" name="kotlin-runtime-1.0.0-beta-2423" level="project" />
+    <orderEntry type="library" exported="" name="kotlin-stdlib-1.0.0-beta-3594" level="project" />
+    <orderEntry type="library" exported="" name="kotlin-runtime-1.0.0-beta-3594" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="junit-4.12" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="hamcrest-core-1.3" level="project" />
     <orderEntry type="library" exported="" name="alarm-lib.alarm-lib" level="project" />

@@ -1,7 +1,7 @@
 package com.mapalarm.usecases
 
-import com.mapalarm.entities.Alarm
+import com.mapalarm.PresentableTrigger
 
 interface AddAlarmPresenter {
-    open fun presentAlarm(alarm: Alarm)
+    open fun presentTrigger(trigger: PresentableTrigger)
 }

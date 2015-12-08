@@ -1,13 +1,25 @@
 package epsz.mapalarm
 
+import android.content.Context
+import com.mapalarm.AddTriggerGateway
 import com.mapalarm.Environment
 import com.mapalarm.TriggersGateway
 import com.mapalarm.datatypes.Position
 import com.mapalarm.entities.PositionTrigger
+import epsz.mapalarm.gateways.GoogleApiLocationGateway
 
-class Injection {
+class Injection(val context: Context) {
+
     init {
         Environment.triggersGateway = PalermoTriggersGateway()
+        Environment.locationGateway = GoogleApiLocationGateway(context)
+        Environment.addTriggerGateway = EmptyAddTriggerGateway()
+    }
+}
+
+class EmptyAddTriggerGateway : AddTriggerGateway {
+    override fun addTrigger(trigger: PositionTrigger) {
+
     }
 }
 

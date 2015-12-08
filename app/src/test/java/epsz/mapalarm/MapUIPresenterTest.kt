@@ -32,6 +32,13 @@ class MapUIPresenterTest {
 
         assertEquals(ui.circles, hashSetOf(Pair(Position(5.0, 48.0), 100.0), Pair(Position(0.5, 4.0), 200.0)))
     }
+
+    @Test
+    fun presentTrigger_withATrigger_addsCircleToTheUI() {
+        sut.presentTrigger(PresentableTrigger(Position(5.0, 48.0), 100.0))
+
+        assertEquals(ui.circles, hashSetOf(Pair(Position(5.0, 48.0), 100.0)))
+    }
 }
 
 class MapUISpy : MapUI {
