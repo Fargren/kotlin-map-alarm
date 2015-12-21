@@ -3,7 +3,8 @@ package epsz.mapalarm
 import android.app.Application
 
 class MapAlarmApp : Application() {
-    init {
+    override fun onCreate() {
+        super.onCreate()
         Injection(this)
     }
 }
