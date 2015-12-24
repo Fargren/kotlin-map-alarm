@@ -13,7 +13,7 @@ import org.junit.Before
 @LargeTest
 class MapActivityTests : ActivityInstrumentationTestCase2<MapActivity>(MapActivity::class.java) {
 
-    private var mapActivity: MapActivity? = null
+    lateinit private var mapActivity: MapActivity
 
     @Before @Throws(Exception::class) public override fun setUp() {
         super.setUp()

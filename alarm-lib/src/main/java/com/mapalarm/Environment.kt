@@ -5,9 +5,9 @@ import com.mapalarm.entities.PositionTrigger
 
 class Environment {
     companion  object {
-        var triggersGateway: TriggersGateway? = null
-        var locationGateway: LocationGateway? = null
-        var addTriggerGateway: AddTriggerGateway? = null
+        lateinit var triggersGateway: TriggersGateway
+        lateinit var locationGateway: LocationGateway
+        lateinit var addTriggerGateway: AddTriggerGateway
     }
 }
 

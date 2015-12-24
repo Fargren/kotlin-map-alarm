@@ -17,10 +17,10 @@ import com.mapalarm.usecases.MoveUseCase
 import kotlinx.android.synthetic.main.activity_map.*
 
 class MapActivity : FragmentActivity(), OnMapReadyCallback, MapUI {
-    val presenter = MapUIPresenter(this)
-    var controller = MapActivityController(presenter, AddTriggerUseCase(presenter))
+    private val presenter = MapUIPresenter(this)
+    private var controller = MapActivityController(presenter, AddTriggerUseCase(presenter))
 
-    private var map: GoogleMap? = null
+    lateinit private var map: GoogleMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +47,7 @@ class MapActivity : FragmentActivity(), OnMapReadyCallback, MapUI {
     private fun createMap(googleMap: GoogleMap) {
         googleMap.isMyLocationEnabled = true
         map = googleMap
-        map!!.setOnMapClickListener {
+        map.setOnMapClickListener {
             controller.addTrigger(it)
             exitEditMode()
         }
@@ -65,8 +65,10 @@ class MapActivity : FragmentActivity(), OnMapReadyCallback, MapUI {
 
     override fun moveMapTo(latitude: Double, longitude: Double) {
         val here = LatLng(latitude, longitude)
-        map!!.moveCamera(CameraUpdateFactory.newLatLngZoom(here, 14f))
-        map!!.animateCamera(CameraUpdateFactory.newLatLng(LatLng(latitude, longitude)))
+        with(map) {
+            moveCamera(CameraUpdateFactory.newLatLngZoom(here, 14f))
+            animateCamera(CameraUpdateFactory.newLatLng(LatLng(latitude, longitude)))
+        }
     }
 
     override fun showUpdatingPositionToast() {
@@ -74,7 +76,7 @@ class MapActivity : FragmentActivity(), OnMapReadyCallback, MapUI {
     }
 
     override fun showCircleAt(pos: Position, radius: Double) {
-        map?.addCircle(CircleOptions()
+        map.addCircle(CircleOptions()
                 .center(LatLng(pos.latitude, pos.longitude))
                 .radius(radius)
                 .strokeColor(Color.RED)
@@ -96,7 +98,7 @@ class MapActivityController(val presenter: MapUIPresenter, val addTriggerUseCase
     }
 
     override fun addTrigger(position: LatLng) {
-        if(editMode)
+        if (editMode)
             addTriggerUseCase.addTriggerAt(Position(position.latitude, position.longitude))
     }
 

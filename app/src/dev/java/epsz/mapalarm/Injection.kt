@@ -6,14 +6,19 @@ import com.mapalarm.Environment
 import com.mapalarm.TriggersGateway
 import com.mapalarm.datatypes.Position
 import com.mapalarm.entities.PositionTrigger
+import epsz.mapalarm.gateways.GoogleApiConnector
 import epsz.mapalarm.gateways.GoogleApiLocationGateway
 
 class Injection(val context: Context) {
 
+    private val googleApiConnector: GoogleApiConnector = GoogleApiConnector(context)
+
     init {
-        Environment.triggersGateway = PalermoTriggersGateway()
-        Environment.locationGateway = GoogleApiLocationGateway(context)
-        Environment.addTriggerGateway = EmptyAddTriggerGateway()
+        with(Environment) {
+            triggersGateway = PalermoTriggersGateway()
+            locationGateway = GoogleApiLocationGateway(googleApiConnector)
+            addTriggerGateway = EmptyAddTriggerGateway()
+        }
     }
 }
 

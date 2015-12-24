@@ -18,7 +18,13 @@ class GoogleApiConnector(val context: Context)
         connectAPI()
     }
 
-    public fun doWithGoogleClient(callback: () -> Unit) {
+    fun doWithGoogleClient(callback: () -> Unit, onError: () -> Unit) {
+        if (!googleApiClient!!.isConnected)
+            errorCallbacks.add(onError)
+        doWithGoogleClient (callback)
+    }
+
+    fun doWithGoogleClient(callback: () -> Unit) {
         if (googleApiClient!!.isConnected)
             callback()
         else
@@ -27,18 +33,9 @@ class GoogleApiConnector(val context: Context)
         connectAPI()
     }
 
-
-    public fun doWithGoogleClient(callback: () -> Unit, onError: () -> Unit) {
-        doWithGoogleClient { callback }
-        if (!googleApiClient!!.isConnected)
-            errorCallbacks.add(onError)
-
-    }
-
     private fun connectAPI() {
         googleApiClient?.let {
-            if (it.isConnected || it.isConnecting)
-                return
+            if (it.isConnected || it.isConnecting) return
         }
 
         googleApiClient = GoogleApiClient.Builder(context)

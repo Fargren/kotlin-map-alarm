@@ -10,14 +10,14 @@ import org.junit.Test
 import java.util.*
 
 class AddTriggerUseCaseTests {
-    var gatewaySpy = addTriggerGatewaySpy()
-    var presenter = AddAlarmPresenterSpy()
-    var sut = AddTriggerUseCase(presenter)
+    lateinit var gatewaySpy:AddTriggerGatewaySpy
+    lateinit var presenter:AddAlarmPresenterSpy
+    lateinit var sut:AddTriggerUseCase
 
     private val DEFAULT_POSITION = Position(34.5, -18.44)
 
     @Before fun setUp() {
-        gatewaySpy = addTriggerGatewaySpy()
+        gatewaySpy = AddTriggerGatewaySpy()
         Environment.addTriggerGateway = gatewaySpy
         presenter = AddAlarmPresenterSpy()
         sut = AddTriggerUseCase(presenter)
@@ -26,14 +26,14 @@ class AddTriggerUseCaseTests {
     @Test @Throws(Exception::class) fun addTriggerAt_newPosition_isRegistered() {
         sut.addTriggerAt(DEFAULT_POSITION)
 
-        assertEquals(Collections.singleton(PositionTrigger(DEFAULT_POSITION, 50.0)),
+        assertEquals(Collections.singleton(PositionTrigger(DEFAULT_POSITION, 200.0)),
                 gatewaySpy.triggers)
     }
 
     @Test @Throws(Exception::class) fun addTriggerAt_newAlarm_isPresented() {
         sut.addTriggerAt(DEFAULT_POSITION)
 
-        assertEquals(Collections.singleton(PresentableTrigger(DEFAULT_POSITION, 50.0)),
+        assertEquals(Collections.singleton(PresentableTrigger(DEFAULT_POSITION, 200.0)),
                 presenter.triggers)
     }
 }
@@ -46,7 +46,7 @@ class AddAlarmPresenterSpy : AddAlarmPresenter {
     }
 }
 
-class addTriggerGatewaySpy : AddTriggerGateway {
+class AddTriggerGatewaySpy : AddTriggerGateway {
     var triggers: HashSet<PositionTrigger> = HashSet()
 
     override fun addTrigger(trigger: PositionTrigger) {

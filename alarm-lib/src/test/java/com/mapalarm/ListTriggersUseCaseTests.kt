@@ -11,8 +11,8 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class ListTriggersUseCaseTests {
-    var presenter = ListTriggersPresenterSpy()
-    var sut = ListTriggersUseCase(presenter)
+    lateinit var presenter:ListTriggersPresenterSpy
+    lateinit var sut:ListTriggersUseCase
 
     @Before
     fun setUp() {

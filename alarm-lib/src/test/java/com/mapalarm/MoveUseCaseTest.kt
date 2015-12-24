@@ -10,8 +10,8 @@ import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 public class MoveUseCaseTest {
-    var presenter = MovePresenterSpy()
-    var sut = MoveUseCase(presenter)
+    lateinit var presenter: MovePresenterSpy
+    lateinit var sut: MoveUseCase
 
     @Before
     fun setUp() {
@@ -39,7 +39,7 @@ public class MoveUseCaseTest {
     }
 }
 
-class FakeLocationGateway: LocationGateway {
+class FakeLocationGateway : LocationGateway {
     public val lat = 34.5
     public val lng = -18.44
     public val position = Position(lat, lng)
