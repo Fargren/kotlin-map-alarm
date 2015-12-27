@@ -6,8 +6,10 @@ import com.mapalarm.Environment
 import com.mapalarm.TriggersGateway
 import com.mapalarm.datatypes.Position
 import com.mapalarm.entities.PositionTrigger
+import com.mapalarm.entities.Trigger
 import epsz.mapalarm.gateways.GoogleApiConnector
-import epsz.mapalarm.gateways.GoogleApiLocationGateway
+import epsz.mapalarm.gateways.GoogleApiUserSituationGateway
+import java.util.*
 
 class Injection(val context: Context) {
 
@@ -15,23 +17,27 @@ class Injection(val context: Context) {
 
     init {
         with(Environment) {
-            triggersGateway = PalermoTriggersGateway()
-            locationGateway = GoogleApiLocationGateway(googleApiConnector)
-            addTriggerGateway = EmptyAddTriggerGateway()
+            val inMemoryTriggersGateway = InMemoryTriggersGateway()
+            triggersGateway = inMemoryTriggersGateway
+            addTriggerGateway = inMemoryTriggersGateway
+            situationGateway = GoogleApiUserSituationGateway(googleApiConnector)
+
+            addTriggerGateway.addTrigger(PositionTrigger(Position(-34.579397619164375, -58.42875838279724), 200.0))
         }
     }
 }
 
-class EmptyAddTriggerGateway : AddTriggerGateway {
-    override fun addTrigger(trigger: PositionTrigger) {
+class InMemoryTriggersGateway() : TriggersGateway, AddTriggerGateway {
+    val triggers = HashSet<Trigger>()
 
+    override fun getTriggers(): Set<Trigger> {
+        val triggerSet = HashSet<Trigger>()
+        triggerSet.addAll(triggers)
+        return triggerSet
     }
-}
 
-class PalermoTriggersGateway : TriggersGateway {
-    override fun getGateways(): Set<PositionTrigger> {
-        var triggers = hashSetOf(PositionTrigger(Position(-34.579397619164375, -58.42875838279724), 200.0))
-        return triggers
+    override fun addTrigger(trigger: PositionTrigger) {
+        triggers.add(trigger)
     }
 
 }

@@ -5,7 +5,7 @@ import com.mapalarm.entities.PositionTrigger
 import java.util.*
 
 class EmptyTriggersGateway : TriggersGateway {
-    override fun getGateways(): Set<PositionTrigger> {
+    override fun getTriggers(): Set<PositionTrigger> {
         return HashSet()
     }
 

@@ -10,20 +10,20 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.mapalarm.datatypes.Position
-import com.mapalarm.usecases.AddTrigger
-import com.mapalarm.usecases.AddTriggerUseCase
-import com.mapalarm.usecases.ListTriggersUseCase
-import com.mapalarm.usecases.MoveUseCase
+import com.mapalarm.usecases.*
 import kotlinx.android.synthetic.main.activity_map.*
 
 class MapActivity : FragmentActivity(), OnMapReadyCallback, MapUI {
     private val presenter = MapUIPresenter(this)
-    private var controller = MapActivityController(presenter, AddTriggerUseCase(presenter))
+    lateinit private var controller:MapActivityController
 
     lateinit private var map: GoogleMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        controller = MapActivityController(presenter, ToastAlarm(this), AddTriggerUseCase(presenter))
+
         setContentView(R.layout.activity_map)
         loadMap()
 
@@ -84,9 +84,18 @@ class MapActivity : FragmentActivity(), OnMapReadyCallback, MapUI {
     }
 }
 
-class MapActivityController(val presenter: MapUIPresenter, val addTriggerUseCase: AddTrigger) : MapUIController {
+class ToastAlarm(val mapActivity: MapActivity) : AlarmPresenter {
+    override fun ring() {
+        throw UnsupportedOperationException()
+    }
+
+}
+
+class MapActivityController(val presenter: MapUIPresenter,
+                            val alarm: AlarmPresenter,
+                            val addTriggerUseCase: AddTrigger) : MapUIController {
     var editMode: Boolean = false
-    private val moveUseCase = MoveUseCase(presenter)
+    private val moveUseCase = MoveUseCase(presenter, alarm)
     private val listTriggersUseCase = ListTriggersUseCase(presenter)
 
     override fun refreshPosition() {

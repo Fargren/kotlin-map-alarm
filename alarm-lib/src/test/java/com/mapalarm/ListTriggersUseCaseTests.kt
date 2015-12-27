@@ -1,7 +1,10 @@
 package com.mapalarm
 
+import com.mapalarm.Constants.Companion.defaultPosition
+import com.mapalarm.Constants.Companion.defaultRadius
 import com.mapalarm.datatypes.Position
 import com.mapalarm.entities.PositionTrigger
+import com.mapalarm.mocks.DefaultTriggersGateway
 import com.mapalarm.usecases.ListTriggersPresenter
 import com.mapalarm.usecases.ListTriggersUseCase
 import org.junit.Before
@@ -11,8 +14,8 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class ListTriggersUseCaseTests {
-    lateinit var presenter:ListTriggersPresenterSpy
-    lateinit var sut:ListTriggersUseCase
+    lateinit var presenter: ListTriggersPresenterSpy
+    lateinit var sut: ListTriggersUseCase
 
     @Before
     fun setUp() {
@@ -29,14 +32,17 @@ class ListTriggersUseCaseTests {
         assertEquals(Collections.emptySet<PresentableTrigger>(), presenter.triggers)
     }
 
+
     @Test
     fun listWithOneAlarm_showsTheAlarm() {
-        Environment.triggersGateway = OneTriggerTriggersGateway()
+        Environment.triggersGateway = DefaultTriggersGateway()
 
         sut.listAll()
 
-        assertEquals(1, presenter.triggers!!.size)
-        assertTrue(presenter.triggers!!.contains(PresentableTrigger(Position(5.0, 42.0), 200.0)))
+        with(presenter.triggers!!) {
+            assertEquals(1, size)
+            assertTrue(contains(PresentableTrigger(defaultPosition, defaultRadius)))
+        }
     }
 
     @Test
@@ -45,26 +51,24 @@ class ListTriggersUseCaseTests {
 
         sut.listAll()
 
-        assertEquals(2, presenter.triggers!!.size)
-        assertTrue(presenter.triggers!!.contains(PresentableTrigger(Position(5.0, 42.0), 100.0)))
-        assertTrue(presenter.triggers!!.contains(PresentableTrigger(Position(-5.0, -2.0), 200.0)))
+        with(presenter.triggers!!) {
+            assertEquals(2, size)
+            assertTrue(contains(PresentableTrigger(defaultPosition, defaultRadius)))
+            assertTrue(contains(PresentableTrigger(Position(-5.0, -2.0), 200.0)))
+        }
     }
 }
 
 class TwoTriggersGateway : TriggersGateway {
-    override fun getGateways(): Set<PositionTrigger> {
-        return hashSetOf(PositionTrigger(Position(5.0, 42.0), 100.0), PositionTrigger(Position(-5.0, -2.0), 200.0))
-    }
-}
-
-class OneTriggerTriggersGateway : TriggersGateway {
-    override fun getGateways(): Set<PositionTrigger> {
-        return Collections.singleton(PositionTrigger(Position(5.0, 42.0), 200.0))
+    override fun getTriggers(): Set<PositionTrigger> {
+        return hashSetOf(
+                PositionTrigger(defaultPosition, defaultRadius),
+                PositionTrigger(Position(-5.0, -2.0), 200.0))
     }
 }
 
 class EmptyTriggersGateway : TriggersGateway {
-    override fun getGateways(): Set<PositionTrigger> {
+    override fun getTriggers(): Set<PositionTrigger> {
         return Collections.emptySet<PositionTrigger>()
     }
 
@@ -76,5 +80,4 @@ class ListTriggersPresenterSpy : ListTriggersPresenter {
     override fun showTriggers(triggers: Set<PresentableTrigger>) {
         this.triggers = triggers
     }
-
 }

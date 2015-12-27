@@ -8,7 +8,7 @@ import java.util.*
 class ListTriggersUseCase(val presenter: ListTriggersPresenter) {
 
     fun listAll() {
-        val triggers = Environment.triggersGateway!!.getGateways().map {
+        val triggers = Environment.triggersGateway.getTriggers().map {
             PresentableTrigger(Position(it.position.latitude , it.position.longitude), it.radius)
         }
         presenter.showTriggers(HashSet(triggers))
