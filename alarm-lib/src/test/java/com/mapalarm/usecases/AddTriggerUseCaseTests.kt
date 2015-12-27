@@ -1,5 +1,8 @@
-package com.mapalarm
+package com.mapalarm.usecases
 
+import com.mapalarm.AddTriggerGateway
+import com.mapalarm.Environment
+import com.mapalarm.PresentableTrigger
 import com.mapalarm.datatypes.Position
 import com.mapalarm.entities.PositionTrigger
 import com.mapalarm.usecases.AddAlarmPresenter
@@ -10,9 +13,9 @@ import org.junit.Test
 import java.util.*
 
 class AddTriggerUseCaseTests {
-    lateinit var gatewaySpy:AddTriggerGatewaySpy
-    lateinit var presenter:AddAlarmPresenterSpy
-    lateinit var sut:AddTriggerUseCase
+    lateinit var gatewaySpy: AddTriggerGatewaySpy
+    lateinit var presenter: AddAlarmPresenterSpy
+    lateinit var sut: AddTriggerUseCase
 
     private val DEFAULT_POSITION = Position(34.5, -18.44)
 

@@ -1,14 +1,14 @@
-package com.mapalarm
+package com.mapalarm.usecases
 
 import com.mapalarm.Constants.Companion.defaultLat
 import com.mapalarm.Constants.Companion.defaultLng
 import com.mapalarm.Constants.Companion.defaultPosition
+import com.mapalarm.Environment
+import com.mapalarm.TriggersGateway
+import com.mapalarm.UserSituationGateway
 import com.mapalarm.datatypes.Position
 import com.mapalarm.datatypes.UserSituation
 import com.mapalarm.entities.Trigger
-import com.mapalarm.usecases.AlarmPresenter
-import com.mapalarm.usecases.MovePresenter
-import com.mapalarm.usecases.MoveUseCase
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test

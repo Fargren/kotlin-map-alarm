@@ -1,7 +1,10 @@
-package com.mapalarm
+package com.mapalarm.usecases
 
 import com.mapalarm.Constants.Companion.defaultPosition
 import com.mapalarm.Constants.Companion.defaultRadius
+import com.mapalarm.Environment
+import com.mapalarm.PresentableTrigger
+import com.mapalarm.TriggersGateway
 import com.mapalarm.datatypes.Position
 import com.mapalarm.entities.PositionTrigger
 import com.mapalarm.mocks.DefaultTriggersGateway
