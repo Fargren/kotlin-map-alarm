@@ -4,7 +4,6 @@ import android.content.Context
 import com.mapalarm.AddTriggerGateway
 import com.mapalarm.Environment
 import com.mapalarm.TriggersGateway
-import com.mapalarm.datatypes.Position
 import com.mapalarm.entities.PositionTrigger
 import com.mapalarm.entities.Trigger
 import epsz.mapalarm.gateways.GoogleApiConnector
@@ -16,13 +15,12 @@ class Injection(val context: Context) {
     private val googleApiConnector: GoogleApiConnector = GoogleApiConnector(context)
 
     init {
+        val inMemoryTriggersGateway = InMemoryTriggersGateway()
+        //inMemoryTriggersGateway.addTrigger(PositionTrigger(Position(-34.579397619164375, -58.42875838279724), 300.0))
         with(Environment) {
-            val inMemoryTriggersGateway = InMemoryTriggersGateway()
             triggersGateway = inMemoryTriggersGateway
             addTriggerGateway = inMemoryTriggersGateway
             situationGateway = GoogleApiUserSituationGateway(googleApiConnector)
-
-            addTriggerGateway.addTrigger(PositionTrigger(Position(-34.579397619164375, -58.42875838279724), 200.0))
         }
     }
 }

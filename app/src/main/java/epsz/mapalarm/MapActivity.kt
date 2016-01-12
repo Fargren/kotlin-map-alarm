@@ -1,8 +1,10 @@
 package epsz.mapalarm
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.FragmentActivity
+import android.widget.Toast
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -84,9 +86,9 @@ class MapActivity : FragmentActivity(), OnMapReadyCallback, MapUI {
     }
 }
 
-class ToastAlarm(val mapActivity: MapActivity) : AlarmPresenter {
+class ToastAlarm(val context: Context) : AlarmPresenter {
     override fun ring() {
-        throw UnsupportedOperationException()
+        Toast.makeText(context, "Alarm!", Toast.LENGTH_LONG).show()
     }
 
 }
